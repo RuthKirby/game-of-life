@@ -13,8 +13,11 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Game of Life");
+        Grid grid = new Grid();
+        grid.prepareGrid();
+        grid.seedInitialTiles(100);
         BorderPane root = new BorderPane();
-        root.setCenter(new Grid(6));
+        root.setCenter(grid);
         primaryStage.setScene(new Scene(root, 300, 300));
         primaryStage.show();
     }
