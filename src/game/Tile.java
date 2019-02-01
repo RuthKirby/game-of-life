@@ -32,8 +32,11 @@ public class Tile extends StackPane {
         setAlignment(Pos.CENTER);
     }
 
-    public boolean isHasCell() {
+    public boolean hasCell() {
         return hasCell;
+    }
+    public void setHasCell(boolean hasCell) {
+        this.hasCell = hasCell;
     }
 
 }
