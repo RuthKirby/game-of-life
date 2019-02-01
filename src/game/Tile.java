@@ -10,11 +10,11 @@ import static javafx.scene.paint.Color.RED;
 
 public class Tile extends StackPane {
 
-    Rectangle border = new Rectangle(30, 30);
-    boolean hasCell;
+    private Rectangle border;
+    private boolean hasCell;
 
     public Tile (boolean hasCell){
-
+        border = new Rectangle(30, 30);
         this.hasCell = hasCell;
         createTile();
 
@@ -31,4 +31,9 @@ public class Tile extends StackPane {
 
         setAlignment(Pos.CENTER);
     }
+
+    public boolean isHasCell() {
+        return hasCell;
+    }
+
 }

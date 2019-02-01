@@ -13,9 +13,7 @@ public class Grid extends GridPane {
     int numColumns;
 
     public Grid () {
-        //prepareGrid();
-        //numRows = numberOfCells + 1;
-        //numColumns = numberOfCells + 1;
+
     }
 
     /**
@@ -60,8 +58,40 @@ public class Grid extends GridPane {
 
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
-                add(Tiles[i][j], i, j);
+                add(Tiles[i][j], j, i); //grid coordinates are (column, row)
             }
         }
     }
+
+    public void getNextIteration(){
+        for (int i = 0; i < Tiles.length; i++) {
+            for (int j = 0; j < Tiles[i].length; j++) {
+                System.out.printf("Tile at (%d, %d) has %d neighbours with live cells", i, j, getCellNeighNo(i, j));
+            }
+        }
+    }
+
+    public boolean isUnderpop() {
+
+        return false;
+    }
+
+    public int getCellNeighNo (int row, int column) {
+        int neighWithCell = 0;
+        int rowMax = Tiles.length;
+        int colMax = Tiles[0].length;
+        int [][] eightNeigh = {{ -1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}};
+
+        for (int i = 0; i < eightNeigh.length; i++) {
+            if ((row + eightNeigh[i][0] > 0 && row + eightNeigh[i][0] < rowMax)
+                    && (column + eightNeigh[i][1] > 0 && column + eightNeigh[i][1] < colMax)) { //check for out of grid
+                if (Tiles[row + eightNeigh[i][0]][column + eightNeigh[i][1]].isHasCell()) {
+                    neighWithCell++;
+                }
+            }
+        }
+
+        return neighWithCell;
+    }
+
 }
