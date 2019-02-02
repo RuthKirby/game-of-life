@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -16,18 +17,20 @@ public class Main extends Application {
     Button btn;
     Grid grid;
     VBox vBox;
+    Label iterLabel;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Game of Life");
+        iterLabel = new Label("Iteration: 1");
         btn = new Button();
         grid = new Grid();
         vBox = new VBox();
 
         grid.prepareGrid();
-        grid.seedInitialTiles(5);
-        vBox.getChildren().addAll(grid, btn);
+        grid.seedInitialTiles(3);
+        vBox.getChildren().addAll(grid, btn, iterLabel);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(5);
 
@@ -45,6 +48,8 @@ public class Main extends Application {
     public void buttonClick() {
         btn.setDisable(true);
         grid.getNextIteration();
+        grid.update();
+        iterLabel.setText("Iteration: " + grid.getIterNum());
         btn.setDisable(false);
     }
     public static void main(String[] args) {
