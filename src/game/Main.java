@@ -29,7 +29,7 @@ public class Main extends Application {
         vBox = new VBox();
 
         grid.prepareGrid();
-        grid.seedInitialTiles(3);
+        grid.seedInitialTiles(5);
         vBox.getChildren().addAll(grid, btn, iterLabel);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(5);
@@ -47,7 +47,7 @@ public class Main extends Application {
 
     public void buttonClick() {
         btn.setDisable(true);
-        grid.getNextIteration();
+        //grid.getNextIteration();
         grid.update();
         iterLabel.setText("Iteration: " + grid.getIterNum());
         btn.setDisable(false);
