@@ -6,6 +6,9 @@ import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
 
+/**
+ * Provides the grid for the game by extending the JavaFX class GridPane.
+ */
 public class Grid extends GridPane {
     int numRows;
     int numColumns;
@@ -34,8 +37,8 @@ public class Grid extends GridPane {
     }
 
     /**
-     * Puts tiles into an array then adds them to the grid.
-     * tiles with live cells are added one after the other apart from
+     * Creates the initial state of the grid. Puts tiles into a 2D structured Tile ArrayList then adds them to the grid.
+     * Tiles with live cells are added one after the other apart from
      * the first/last row/column
      * @param numberOfCells int of tiles that have live cells
      */
@@ -78,7 +81,10 @@ public class Grid extends GridPane {
         addTilesToGrid();
     }
 
-    public void getNextIteration(){
+    /**
+     * Gets the state of the next iteration of the grid.
+     */
+    private void getNextIteration(){
 
         for (int i = 0; i < tiles.size(); i++) {
             for (int j = 0; j < tiles.get(i).size(); j++) {
@@ -113,7 +119,14 @@ public class Grid extends GridPane {
         iteration++;
     }
 
-    public int getCellNeighNo (int row, int column) {
+    /**
+     * Calculates the number of neighbours with a live cell that a tile has by checking (if not outside the grid)
+     * the tiles diagonal, vertical and horizontal neighbours.
+     * @param row
+     * @param column
+     * @return int - the number of neighbours the tile has on the grid that contain live cells
+     */
+    private int getCellNeighNo (int row, int column) {
         int neighWithCell = 0;
         int rowMax = tiles.size();
         int colMax = tiles.get(0).size();
@@ -121,7 +134,7 @@ public class Grid extends GridPane {
 
         for (int i = 0; i < eightNeigh.length; i++) {
             if ((row + eightNeigh[i][0] >= 0 && row + eightNeigh[i][0] < rowMax)
-                    && (column + eightNeigh[i][1] >= 0 && column + eightNeigh[i][1] < colMax)) { //check for out of grid
+                    && (column + eightNeigh[i][1] >= 0 && column + eightNeigh[i][1] < colMax)) { //check for inside the grid
                 if (tiles.get(row + eightNeigh[i][0]).get(column + eightNeigh[i][1]).hasCell()) {
                     neighWithCell++;
                 }
@@ -131,6 +144,9 @@ public class Grid extends GridPane {
         return neighWithCell;
     }
 
+    /**
+     * Adds the tiles from the 2D ArrayLisr structure to the grid.
+     */
     private void addTilesToGrid() {
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
@@ -139,6 +155,9 @@ public class Grid extends GridPane {
         }
     }
 
+    /**
+     * Expands the outside edge of the grid.
+     */
     private void expandGridEdge () {
         tiles.add(0, new ArrayList<>()); //Adds new row to top of grid
         tiles.add(tiles.size(), new ArrayList<>()); //Adds new row to bottom of grid
@@ -163,6 +182,9 @@ public class Grid extends GridPane {
         return iteration;
     }
 
+    /**
+     * Enum storing the scenarios that can change a tile's state.
+     */
     public enum TileScenario {
 
         UNDERPOPULATED(),

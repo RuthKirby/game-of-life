@@ -8,6 +8,10 @@ import javafx.scene.shape.Rectangle;
 import static javafx.scene.paint.Color.BLACK;
 import static javafx.scene.paint.Color.RED;
 
+/**
+ * Extends the JavaFX class StackPane in order to provide the tiles that make up the grid.
+ * @author Ruth Bovell
+ */
 public class Tile extends StackPane {
 
     private Rectangle border;
@@ -24,6 +28,9 @@ public class Tile extends StackPane {
 
     }
 
+    /**
+     * Sets up the visual aspects of the tile. If it contains a live cell this is added.
+     */
     private void createTile() {
         border.setFill(null);
         border.setStroke(BLACK);
@@ -35,6 +42,10 @@ public class Tile extends StackPane {
         setAlignment(Pos.CENTER);
     }
 
+    /**
+     * Sets the amount of neighbours of the tile that contain a cell
+     * @param neighWithCell
+     */
     public void setNeighWithCell(int neighWithCell) {
         this.neighWithCell = neighWithCell;
     }
@@ -47,6 +58,11 @@ public class Tile extends StackPane {
         return neighWithCell;
     }
 
+    /**
+     * Adds a cell to tile if parameter is true and
+     * removes cell from tile if false. Then set's hasCell variable.
+     * @param hasCell
+     */
     public void setHasCell(boolean hasCell) {
         if (hasCell) {
             if (!getChildren().contains(cell)) {

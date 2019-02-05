@@ -5,9 +5,12 @@ import javafx.scene.shape.Circle;
 import static javafx.scene.paint.Color.BLACK;
 import static javafx.scene.paint.Color.RED;
 
+/**
+ *Extends the JavaFX Circle class in order to represent a live cell
+ * @author Ruth Bovell
+ */
 public class Cell extends Circle{
     public Cell (){
-        setStroke(RED);
         setRadius(5);
         setFill(BLACK);
     }
