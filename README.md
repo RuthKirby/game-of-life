@@ -15,7 +15,7 @@ cells. If something other than a non-negative integer is used then the
 grid is seeded with a default number (3).
 
 ## Decisions
-* Cells are all next to each other when seeded while leaving a blank edge so that
+* Cells are all next to each other when initially seeded while leaving a blank edge so that
 cell creation can be determined. 
 * If a cell is created on the edge of grid then the grid expands so that the edge of grid is
 always blank tiles. For example if a cell is created at coordinates (0,0) the grid creates a new
