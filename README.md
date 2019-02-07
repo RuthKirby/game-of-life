@@ -1,6 +1,6 @@
 # Game of Life
 
-Infinite 2D grid of cells.
+Infinite 2D grid of cells. View documentation [here](https://ruthkirby.github.io/game-of-life/)
 
 ## Running the .jar
 
