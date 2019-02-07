@@ -5,6 +5,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
+import java.security.InvalidParameterException;
+
 import static javafx.scene.paint.Color.BLACK;
 import static javafx.scene.paint.Color.RED;
 
@@ -17,22 +19,19 @@ public class Tile extends StackPane {
 
     private Rectangle border;
     private Cell cell;
-    private boolean hasCell;
     private int neighWithCell;
 
     public Tile (boolean hasCell){
         border = new Rectangle(30, 30);
         neighWithCell = 0;
         cell = new Cell();
-        this.hasCell = hasCell;
-        createTile();
-
+        createTile(hasCell);
     }
 
     /**
      * Sets up the visual aspects of the tile. If it contains a live cell this is added.
      */
-    private void createTile() {
+    private void createTile(boolean hasCell) {
         border.setFill(null);
         border.setStroke(BLACK);
         getChildren().add(border);
@@ -44,11 +43,15 @@ public class Tile extends StackPane {
     }
 
     public void setNeighWithCell(int neighWithCell) {
+        if (neighWithCell < 0 || neighWithCell > 8) {
+            throw new InvalidParameterException(neighWithCell + " is not a valid input. The number of neighbours a tile has" +
+                    " must be between 0 and 8");
+        }
         this.neighWithCell = neighWithCell;
     }
 
     public boolean hasCell() {
-        return hasCell;
+        return getChildren().contains(cell);
     }
 
     public int getNeighWithCell() {
@@ -57,7 +60,7 @@ public class Tile extends StackPane {
 
     /**
      * Adds a cell to tile if parameter is true and
-     * removes cell from tile if false. Then set's hasCell variable.
+     * removes cell from tile if false.
      * @param hasCell boolean - whether or not the tile should have a cell
      */
     public void setHasCell(boolean hasCell) {
@@ -72,6 +75,10 @@ public class Tile extends StackPane {
                 getChildren().remove(cell);
             }
         }
-        this.hasCell = hasCell;
     }
+
+    public Cell getCell() {
+        return cell;
+    }
+
 }

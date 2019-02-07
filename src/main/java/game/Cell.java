@@ -3,7 +3,6 @@ package game;
 import javafx.scene.shape.Circle;
 
 import static javafx.scene.paint.Color.BLACK;
-import static javafx.scene.paint.Color.RED;
 
 /**
  *Extends the JavaFX Circle class in order to represent a live cell

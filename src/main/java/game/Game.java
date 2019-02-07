@@ -9,6 +9,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.security.InvalidParameterException;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
@@ -60,17 +61,17 @@ public class Game extends Application {
      * Sets up the game's grid. Uses default number if program argument is not found or is less
      * than zero.
      */
-    private void setUpGrid() {
+    private void setUpGrid() throws InvalidParameterException{
         List<String> list = params.getRaw();
         try {
             numberOfCells = parseInt(list.get(0));
             if (numberOfCells < 0) {
-                throw new NumberFormatException();
+                throw new InvalidParameterException();
             }
         }
 
-        catch (NumberFormatException | IndexOutOfBoundsException ex) {
-            if (ex instanceof NumberFormatException) {
+        catch (InvalidParameterException | IndexOutOfBoundsException ex) {
+            if (ex instanceof InvalidParameterException) {
                 System.err.println("Number of cells must be a positive integer. Using default number (3)");
                 numberOfCells = 3;
             }
