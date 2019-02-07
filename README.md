@@ -14,21 +14,6 @@ use the argument as the number of cells to seed the grid with e.g.
 cells. If something other than a non-negative integer is used then the 
 grid is seeded with a default number (3).
 
-## Example
-
-When a grid is seeded with 3 cells:
-
-![Grid seeded with three cells](/screenshots/seed_3_it_1.PNG)
-
-When the 'Next Iteration' button is pressed:
-
-![Grid seeded with three cells on second iteration](/screenshots/seed_3_it_2.PNG)
-
-When the 'Next Iteration' button is pressed for a second time:
-
-![Grid seeded with three cells](/screenshots/seed_3_it_3.PNG)
-
-
 ## Decisions
 * To achieve a dynamic structure 
 for grid that could grow when needed and satisfy 'infinite' quality
@@ -42,3 +27,17 @@ stored in Enum items.
 
 * [Maven](https://maven.apache.org/) - Management of dependencies
 * [JavaFX](https://openjfx.io/) - GUI
+
+## Example
+
+When a grid is seeded with 3 cells:
+
+![Grid seeded with three cells](/screenshots/seed_3_it_1.PNG)
+
+When the 'Next Iteration' button is pressed:
+
+![Grid seeded with three cells on second iteration](/screenshots/seed_3_it_2.PNG)
+
+When the 'Next Iteration' button is pressed for a second time:
+
+![Grid seeded with three cells](/screenshots/seed_3_it_3.PNG)
