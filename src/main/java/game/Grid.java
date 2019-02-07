@@ -7,7 +7,7 @@ import javafx.scene.layout.GridPane;
 import java.util.ArrayList;
 
 /**
- * Provides the grid for the game by extending the JavaFX class GridPane.
+ * Extends the JavaFX class GridPane, defines grid that will hold the tiles.
  */
 public class Grid extends GridPane {
     int numRows;
@@ -45,12 +45,10 @@ public class Grid extends GridPane {
     public void seedInitialTiles(int numberOfCells) {
         numColumns = (int) Math.ceil(Math.sqrt((double)numberOfCells)) + 3;
         numRows = (int) Math.ceil(Math.sqrt((double)numberOfCells)) + 3;
-        System.out.println(tiles.size());
         int k = numberOfCells;
         for (int i = 0; i < numRows; i++) {
             tiles.add(new ArrayList<Tile>());
             for (int j = 0; j < numColumns; j++) {
-                System.out.println(tiles.size());
                 if (i < 2 || i > numRows - 2 || j == 0 || j == numColumns - 1) { //makes sure top/bottom two rows, left/right column have no live cells
                     tiles.get(i).add(j, new Tile(false));
                 }
@@ -75,6 +73,10 @@ public class Grid extends GridPane {
         addTilesToGrid();
     }
 
+    /**
+     * Gets the state of the next grid, clears the current grid then updates
+     * with new state.
+     */
     public void update() {
         getNextIteration();
         getChildren().clear();
@@ -92,7 +94,7 @@ public class Grid extends GridPane {
 
                 switch (tileScenario) {
                     case CREATION: tiles.get(i).get(j).setHasCell(true);
-                        if (i == 0 || j == 0 || i == tiles.size() - 1 || j == tiles.size() - 1) {
+                        if (i == 0 || j == 0 || i == tiles.size() - 1 || j == tiles.size() - 1) { //expand grid if cell is created at edge
                             expandGrid = true;
                         }
                         break;
@@ -115,7 +117,7 @@ public class Grid extends GridPane {
             expandGridEdge();
             expandGrid = false;
         }
-        System.out.println(tiles.size());
+
         iteration++;
     }
 
@@ -145,7 +147,7 @@ public class Grid extends GridPane {
     }
 
     /**
-     * Adds the tiles from the 2D ArrayLisr structure to the grid.
+     * Adds the tiles from the 2D ArrayList structure to the grid.
      */
     private void addTilesToGrid() {
         for (int i = 0; i < numRows; i++) {
@@ -193,7 +195,13 @@ public class Grid extends GridPane {
         CREATION(),
         STAY_BLANK();
 
-
+        /**
+         * Retrieves enum item that represents the valid scenarios that
+         * can apply to a tile.
+         * @param neighWithCell int neighbouring tiles that contain cells
+         * @param hasCell boolean whether the tile has cell
+         * @return enum item
+         */
         public static TileScenario getScenario(int neighWithCell, boolean hasCell) {
             if (neighWithCell < 2 && hasCell == true) {
                 return UNDERPOPULATED;
