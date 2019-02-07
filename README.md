@@ -15,13 +15,17 @@ cells. If something other than a non-negative integer is used then the
 grid is seeded with a default number (3).
 
 ## Decisions
-* To achieve a dynamic structure 
-for grid that could grow when needed and satisfy 'infinite' quality
-array structure was changed to ArrayList.
-* Cells are all next to each other leaving a blank edge so that
+* Cells are all next to each other when seeded while leaving a blank edge so that
 cell creation can be determined. 
+* If a cell is created on the edge of grid then the grid expands so that the edge of grid is
+always blank tiles. For example if a cell is created at coordinates (0,0) the grid creates a new
+rows and columns so that what was at (0, 0) is now at (1, 1). This ensures grid can be 'infinite' in
+its growth. 
+* Initially I stored the grid in a 2D array but to achieve a dynamic structure 
+for grid that could grow when needed and satisfy 'infinite' quality
+I changed to using ArrayList.
 * Scenarios that determine tile's state in next iteration are
-stored in Enum items. 
+stored in Enum items so that new scenarios could be easily added. 
 
 ## Built with
 
